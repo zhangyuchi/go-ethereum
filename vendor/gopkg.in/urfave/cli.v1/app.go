@@ -250,7 +250,7 @@ func (a *App) Run(arguments []string) (err error) {
 	args := context.Args()
 	if args.Present() {
 		name := args.First()
-		c := a.Command(name)
+		c := a.Command(name) //调用对应的command函数，例如cmd/geth/consolecmd.go的localConsole
 		if c != nil {
 			return c.Run(context)
 		}
@@ -261,7 +261,7 @@ func (a *App) Run(arguments []string) (err error) {
 	}
 
 	// Run default Action
-	err = HandleAction(a.Action, context)
+	err = HandleAction(a.Action, context)//note：针对geth会调用cmd/geth/main.go的geth函数
 
 	HandleExitCoder(err)
 	return err
